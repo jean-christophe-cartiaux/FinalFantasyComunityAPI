@@ -1,1 +1,6 @@
-export class CreateRegleDto {}
+import {Expose} from "class-transformer";
+
+export class CreateRegleDto {
+
+
+}

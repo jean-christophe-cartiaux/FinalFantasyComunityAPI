@@ -39,7 +39,8 @@ import {Reaction} from "./reactions/entities/reaction.entity";
 import {Regle} from "./regles/entities/regle.entity";
 import {Signalement} from "./signalement/entities/signalement.entity";
 import {Statistique} from "./statistique/entities/statistique.entity";
-import {Utilisateur} from "./utilisateurs/entities/utilisateur.entity";
+import {Utilisateurs} from "./utilisateurs/entities/utilisateur.entity";
+
 
 @Module({
   imports: [
@@ -47,7 +48,11 @@ import {Utilisateur} from "./utilisateurs/entities/utilisateur.entity";
         type:"mssql",
         database:'FinalFantasy',
         username: 'sa',
+          host: 'localhost',
         password: 'W3lcome36109',
+          options: {
+            trustServerCertificate: true,
+          },
         entities:[Actualites,
             AdminModo,
             Amis,
@@ -66,9 +71,9 @@ import {Utilisateur} from "./utilisateurs/entities/utilisateur.entity";
             Regle,
             Signalement,
             Statistique,
-            Utilisateur
+            Utilisateurs
         ],
-        synchronize:false
+        synchronize: false
       }),
       AdminModoModule,
       ActualitesModule,
@@ -89,6 +94,7 @@ import {Utilisateur} from "./utilisateurs/entities/utilisateur.entity";
       SignalementModule,
       StatistiqueModule,
       UtilisateursModule,
+
 
   ],
   controllers: [AppController],

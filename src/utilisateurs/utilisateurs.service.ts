@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
+import {Utilisateurs} from "./entities/utilisateur.entity";
+
 
 @Injectable()
 export class UtilisateursService {
-  create(createUtilisateurDto: CreateUtilisateurDto) {
-    return 'This action adds a new utilisateur';
+
+  constructor(@InjectRepository(Utilisateurs) private _repo: Repository<Utilisateurs>){}
+
+  register(body):Promise<Utilisateurs> {
+    const {email, result, pseudo, prenom} = body;
+    console.log(result)
+    const utilisateur=this._repo.create({email, mdpHash: result, pseudo, prenom});
+    return this._repo.save(utilisateur);
+  }
+  find(email: string) {
+
+    return this._repo.find({ where: { email } });
   }
 
   findAll() {
