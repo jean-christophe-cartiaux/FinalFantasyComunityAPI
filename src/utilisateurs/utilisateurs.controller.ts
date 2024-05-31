@@ -16,6 +16,9 @@ import { UtilisateursService } from './utilisateurs.service';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import {AuthService} from "./auth.service";
+import {UtilisateurCourant} from "../decorators/decorator";
+import {Utilisateurs} from "./entities/utilisateur.entity";
+import {LoginUtilisateurDto} from "./dto/login-utilisateur.dto";
 
 @Controller('utilisateurs')
 export class UtilisateursController {
@@ -35,22 +38,32 @@ export class UtilisateursController {
     return utilisateur;
   }
 
-  // @Get('/profil')
-  // profil(@UserCourant)
+  @Get('/profil/:id')
+  async profil(@UtilisateurCourant()body : Utilisateurs, @Param('id') id: string):Promise <Partial<Utilisateurs>> {
+    const {pseudo,bio,supportPref,idAvatar}= body;
+    const utilisateurs= await this._utilisateurService.profil({pseudo,bio,supportPref,idAvatar},id)
 
-  //
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.utilisateursService.findOne(+id);
-  // }
-  //
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateUtilisateurDto: UpdateUtilisateurDto) {
-  //   return this.utilisateursService.update(+id, updateUtilisateurDto);
-  // }
-  //
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.utilisateursService.remove(+id);
-  // }
+
+    return utilisateurs;
+
+  }
+
+
+  @Post('/login')
+  async login(@Body() body:LoginUtilisateurDto,@Session()session:any) {
+    const {email, mdpHash }= body;
+    const utilisateur= await this._authService.login({email, mdpHash})
+    session.userId=utilisateur.id;
+
+    return utilisateur;
+  }
+   @Patch('/:id')
+   update(@Param('id') id: string, @Body() body: UpdateUtilisateurDto) {
+    console.log(typeof body.idAvatar)
+     return this._utilisateurService.update(id,body);
+   }
+    @Delete('/:id')
+   remove(@Param('id') id: string) {
+      return this._utilisateurService.remove(id);
+    }
 }

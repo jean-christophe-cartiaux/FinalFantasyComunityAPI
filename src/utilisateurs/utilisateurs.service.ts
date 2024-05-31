@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import {InjectRepository} from "@nestjs/typeorm";
@@ -13,28 +13,49 @@ export class UtilisateursService {
 
   register(body):Promise<Utilisateurs> {
     const {email, result, pseudo, prenom} = body;
-    console.log(result)
+
     const utilisateur=this._repo.create({email, mdpHash: result, pseudo, prenom});
     return this._repo.save(utilisateur);
   }
+  findOne(id:string){
+    return this._repo.findOneBy({id});
+  }
+
   find(email: string) {
 
     return this._repo.find({ where: { email } });
+  }
+  async profil(body: Partial<Utilisateurs>,id:string):Promise <Partial<Utilisateurs>> {
+    const {pseudo,bio,supportPref,idAvatar}= body;
+    const idutilisateur = await this.findOne(id)
+
+    if(!idutilisateur){
+      throw new NotFoundException('Utilisateurs invalide')
+    }
+    return body;
+
   }
 
   findAll() {
     return `This action returns all utilisateurs`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} utilisateur`;
+
+
+  async update(id: string, data:Partial<Utilisateurs>) {
+    const utilisateur= await this.findOne(id);
+    if(!utilisateur){
+      throw new NotFoundException(`Utilisateur avec id ${id} introuvable ༼ つ ◕_◕ ༽つ`);
+    }
+    Object.assign(utilisateur,data);
+    return this._repo.save(utilisateur);
   }
 
-  update(id: number, updateUtilisateurDto: UpdateUtilisateurDto) {
-    return `This action updates a #${id} utilisateur`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} utilisateur`;
+  async remove(id: string) {
+    const utilisateurs = await this.findOne(id);
+    if(!utilisateurs){
+      throw new NotFoundException('Utilisateur introuvable (❁´◡`❁)');
+    }
+    return this._repo.remove(utilisateurs);
   }
 }

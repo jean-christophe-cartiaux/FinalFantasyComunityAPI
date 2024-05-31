@@ -23,10 +23,12 @@ export class AuthService {
         const hash =(await scrypt(mdpHash,salt,32)) as Buffer;
         const result = salt + '.' + hash.toString('hex');
         const utilisateurs=await this._utilisateursService.register({email,result,pseudo,prenom})
+
         return utilisateurs
     }
 
-    async login(email:string,mdpHash:string){
+    async login(body){
+        const {email,mdpHash}=body
         const [utilisateurs] = await this._utilisateursService.find(email);
         if(!utilisateurs){
             throw new NotFoundException('compte inexistant');
@@ -38,6 +40,7 @@ export class AuthService {
         if(storedHash !== hash.toString('hex')){
             throw new BadRequestException('Mots de passe invalide ಠ_ಠ')
         }
+
         return utilisateurs;
     }
 }

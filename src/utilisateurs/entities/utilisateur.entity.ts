@@ -11,8 +11,8 @@ export class Utilisateurs {
 
 
     @Column({nullable:true})
-    @Exclude()
     @IsOptional()
+    @Exclude()
     prenom:string;
 
 
@@ -23,22 +23,24 @@ export class Utilisateurs {
 
 
     @Column()
-    @Exclude()
+
     pseudo:string;
 
     @Column()
+    @Exclude()
     email:string;
 
     @Column()
+    @Exclude()
     mdpHash:string;
 
     @Column({nullable:true})
-    @Exclude()
+
     @IsOptional()
     bio:string;
 
     @Column({nullable:true})
-    @Exclude()
+
     @IsOptional()
     supportPref:string;
 

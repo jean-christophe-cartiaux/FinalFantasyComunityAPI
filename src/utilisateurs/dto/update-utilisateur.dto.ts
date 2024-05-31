@@ -1,4 +1,4 @@
-import {IsEmail,IsStrongPassword,IsString,IsOptional} from "class-validator";
+import {IsEmail, IsStrongPassword, IsString, IsOptional, IsNumber} from "class-validator";
 
 export class UpdateUtilisateurDto  {
 
@@ -16,8 +16,17 @@ export class UpdateUtilisateurDto  {
 
     @IsStrongPassword()
     @IsOptional()
-
     mdpHash:string
 
+    @IsString()
+    @IsOptional()
+    bio:string
+
+    @IsNumber()
+    @IsOptional()
+    idAvatar: number
+    @IsString()
+    @IsOptional()
+    supportPref:string
 
 }
