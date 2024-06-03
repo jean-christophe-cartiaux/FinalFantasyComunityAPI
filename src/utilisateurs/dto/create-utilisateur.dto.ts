@@ -14,6 +14,6 @@ export class CreateUtilisateurDto {
     @IsEmail()
     email:string
 
-    @IsStrongPassword()
+    @IsString()
     mdpHash:string
 }

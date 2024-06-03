@@ -12,6 +12,11 @@ async function bootstrap() {
       })
   );
   app.useGlobalPipes(new ValidationPipe())
+  app.enableCors({
+      origin: 'http://localhost:4200', // Autoriser seulement cette origine
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+  })
   await app.listen(3000);
 }
 bootstrap();

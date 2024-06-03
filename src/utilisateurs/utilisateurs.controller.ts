@@ -16,9 +16,10 @@ import { UtilisateursService } from './utilisateurs.service';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import {AuthService} from "./auth.service";
-import {UtilisateurCourant} from "../decorators/decorator";
+import {UtilisateurCourant} from "./decorators/decorator";
 import {Utilisateurs} from "./entities/utilisateur.entity";
 import {LoginUtilisateurDto} from "./dto/login-utilisateur.dto";
+import {AuthGuard} from "./guards/auth.guard";
 
 @Controller('utilisateurs')
 export class UtilisateursController {
@@ -28,7 +29,12 @@ export class UtilisateursController {
 
   ) {}
 
-
+    @Get('/myProfil')
+    @UseGuards(AuthGuard)
+    moi(@UtilisateurCourant() user: Utilisateurs) {
+        console.log(user);
+        return user;
+    }
 
   @Post('/register')
   async register(@Body() body:CreateUtilisateurDto,@Session()session:any) {
@@ -47,6 +53,7 @@ export class UtilisateursController {
     return utilisateurs;
 
   }
+
 
 
   @Post('/login')

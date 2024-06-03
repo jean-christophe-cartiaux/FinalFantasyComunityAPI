@@ -6,7 +6,7 @@ export class LoginUtilisateurDto {
     @IsEmail()
     email:string
 
-    @IsStrongPassword()
+    @IsString()
     mdpHash:string
 
 

@@ -14,7 +14,7 @@ export class UpdateUtilisateurDto  {
     @IsOptional()
     email:string
 
-    @IsStrongPassword()
+    @IsString()
     @IsOptional()
     mdpHash:string
 
