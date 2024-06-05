@@ -38,8 +38,8 @@ export class UtilisateursController {
 
   @Post('/register')
   async register(@Body() body:CreateUtilisateurDto,@Session()session:any) {
-    const {email, mdpHash, pseudo, prenom} = body;
-    const utilisateur= await this._authService.register({email, mdpHash, pseudo, prenom})
+    const {email, mdpHash, pseudo} = body;
+    const utilisateur= await this._authService.register({email, mdpHash, pseudo})
     session.userId=utilisateur.id;
     return utilisateur;
   }

@@ -7,9 +7,7 @@ export class CreateUtilisateurDto {
     @IsString()
     pseudo:string
 
-    @IsString()
-    @IsOptional()
-    prenom: string;
+
 
     @IsEmail()
     email:string

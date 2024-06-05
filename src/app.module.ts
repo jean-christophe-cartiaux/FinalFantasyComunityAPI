@@ -40,16 +40,19 @@ import {Regle} from "./regles/entities/regle.entity";
 import {Signalement} from "./signalement/entities/signalement.entity";
 import {Statistique} from "./statistique/entities/statistique.entity";
 import {Utilisateurs} from "./utilisateurs/entities/utilisateur.entity";
+import {ConfigModule} from "@nestjs/config";
 
 
 @Module({
   imports: [
+      ConfigModule.forRoot(),
       TypeOrmModule.forRoot({
         type:"mssql",
-        database:'FinalFantasy',
-        username: 'sa',
-          host: 'localhost',
-        password: 'W3lcome36109',
+          host: process.env.DB_HOST,
+          port: parseInt(process.env.DB_PORT,10) ,
+          username: process.env.DB_USER,
+          password: process.env.DB_PASSWORD,
+          database: process.env.DB_NAME,
           options: {
             trustServerCertificate: true,
           },

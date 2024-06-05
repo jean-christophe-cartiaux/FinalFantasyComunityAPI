@@ -2,13 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {ValidationPipe} from "@nestjs/common";
 const cookieSession=require('cookie-session');
+import* as dotenv from "dotenv";
+import * as process from "node:process";
 
 
+
+dotenv.config();
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
   app.use(
       cookieSession({
-        keys:['rgjeuzhoghsoihofguehguher']
+        keys:[process.env.COOKIE_KEY],
       })
   );
   app.useGlobalPipes(new ValidationPipe())
@@ -17,6 +22,6 @@ async function bootstrap() {
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       credentials: true,
   })
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
