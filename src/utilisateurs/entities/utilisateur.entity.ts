@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany} from "typeorm";
 import{Exclude} from "class-transformer";
 import {IsOptional} from "class-validator";
+import {AdminModo} from "../../admin-modo/entities/admin-modo.entity";
 
 
 @Entity()
@@ -48,5 +49,13 @@ export class Utilisateurs {
     @IsOptional()
     idAvatar:number;
 
+    @OneToOne(type => AdminModo, adminModo => adminModo.admin, { nullable: true })
+    adminModo: AdminModo;
+
+    @OneToMany(type => AdminModo, adminModo => adminModo.modo, { nullable: true })
+    modos: AdminModo[];
+
+    @OneToMany(type => AdminModo, adminModo => adminModo.warriorOfLight, { nullable: true })
+    warriorsOfLight: AdminModo[];
 
 }
