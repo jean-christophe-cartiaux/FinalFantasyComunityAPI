@@ -1,4 +1,5 @@
-import {Column, PrimaryGeneratedColumn} from "typeorm";
+import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 
 
 export class ParametreUtilisateur {
@@ -14,6 +15,8 @@ export class ParametreUtilisateur {
 
     //TODO
     // FK ID UTILISATEUR
-
+    @ManyToOne(() => Utilisateurs)
+    @JoinColumn({ name: "utilisateurId" })
+    utilisateur: Utilisateurs;
 
 }

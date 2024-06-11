@@ -1,4 +1,5 @@
-import {Column, PrimaryGeneratedColumn} from "typeorm";
+import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 
 
 export class MessagePrive {
@@ -13,5 +14,12 @@ export class MessagePrive {
 
     //TODO
     // FK EXPEDITEUR  /  DESTINATAIRE
+    @ManyToOne(()=>Utilisateurs)
+    @JoinColumn({name:'expediteurId'})
+    expediteur:Utilisateurs;
+
+    @ManyToOne(()=>Utilisateurs)
+    @JoinColumn({name:'destinataireId'})
+    destinataire:Utilisateurs;
 
 }

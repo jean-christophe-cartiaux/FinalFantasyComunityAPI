@@ -26,6 +26,7 @@ export class Evenement {
     @ManyToOne(()=>Utilisateurs)
     @JoinColumn({name:"createurId"})
     createur:Utilisateurs
+    
 
 
 }

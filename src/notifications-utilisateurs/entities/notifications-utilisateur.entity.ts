@@ -1,4 +1,5 @@
-import {Column, PrimaryGeneratedColumn} from "typeorm";
+import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 
 
 export class NotificationsUtilisateur {
@@ -15,4 +16,7 @@ export class NotificationsUtilisateur {
 
     //TODO
     // FK ID UTILISATEUR
+    @ManyToOne(() => Utilisateurs)
+    @JoinColumn({ name: "utilisateurId" })
+    utilisateur: Utilisateurs;
 }

@@ -21,7 +21,6 @@ import { ReactionsModule } from './reactions/reactions.module';
 import { ReglesModule } from './regles/regles.module';
 import { SignalementModule } from './signalement/signalement.module';
 import { StatistiqueModule } from './statistique/statistique.module';
-import { UtilisateursModule } from './utilisateurs/utilisateurs.module';
 import {AdminModo} from "./admin-modo/entities/admin-modo.entity";
 import {Amis} from "./amis/entities/ami.entity";
 import {Avatar} from "./avatars/entities/avatar.entity";
@@ -41,6 +40,7 @@ import {Signalement} from "./signalement/entities/signalement.entity";
 import {Statistique} from "./statistique/entities/statistique.entity";
 import {Utilisateurs} from "./utilisateurs/entities/utilisateur.entity";
 import {ConfigModule} from "@nestjs/config";
+import {UtilisateursModule} from "./utilisateurs/utilisateurs.module";
 
 
 @Module({
@@ -96,7 +96,7 @@ import {ConfigModule} from "@nestjs/config";
       ReglesModule,
       SignalementModule,
       StatistiqueModule,
-      UtilisateursModule,
+      UtilisateursModule
 
 
   ],

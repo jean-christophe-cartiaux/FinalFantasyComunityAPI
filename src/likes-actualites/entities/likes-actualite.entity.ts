@@ -1,4 +1,6 @@
-import {PrimaryGeneratedColumn} from "typeorm";
+import {JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
+import {Actualites} from "../../actualites/entities/actualite.entity";
 
 export class LikesActualite {
     @PrimaryGeneratedColumn()
@@ -6,4 +8,11 @@ export class LikesActualite {
 
     //TODO
     // FK ID ACTU / ID UTILISATEUR
+    @ManyToOne(()=>Utilisateurs)
+    @JoinColumn({name:'UtilisateurId'})
+    utilisateur:Utilisateurs;
+
+    @ManyToOne(() => Actualites)
+    @JoinColumn({ name: "actualiteId" })
+    actualite: Actualites;
 }
