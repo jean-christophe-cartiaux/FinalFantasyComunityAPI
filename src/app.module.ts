@@ -76,7 +76,7 @@ import {ConfigModule} from "@nestjs/config";
             Statistique,
             Utilisateurs
         ],
-        synchronize: false
+        synchronize: true
       }),
       AdminModoModule,
       ActualitesModule,

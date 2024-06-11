@@ -4,12 +4,14 @@ import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {Utilisateurs} from "./entities/utilisateur.entity";
+import {AdminModo} from "../admin-modo/entities/admin-modo.entity";
 
 
 @Injectable()
 export class UtilisateursService {
 
-  constructor(@InjectRepository(Utilisateurs) private _repo: Repository<Utilisateurs>){}
+
+  constructor(@InjectRepository(Utilisateurs) private _repo: Repository<Utilisateurs>,@InjectRepository(AdminModo) private  roleRepository:Repository<AdminModo> ){}
 
   register(body):Promise<Utilisateurs> {
     const {email, result, pseudo, prenom} = body;
@@ -42,7 +44,7 @@ export class UtilisateursService {
 
 
 
-  async update(id: string, data:Partial<Utilisateurs>) {
+  async update(id: string, data:Utilisateurs) {
     const utilisateur= await this.findOne(id);
     if(!utilisateur){
       throw new NotFoundException(`Utilisateur avec id ${id} introuvable ༼ つ ◕_◕ ༽つ`);
@@ -57,5 +59,21 @@ export class UtilisateursService {
       throw new NotFoundException('Utilisateur introuvable (❁´◡`❁)');
     }
     return this._repo.remove(utilisateurs);
+  }
+
+  async assignRole(userId: string, roleId: string): Promise<Utilisateurs> {
+    const user = await this._repo.findOne({where:{id:userId}});
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+    const role = await this.roleRepository.find();
+    console.log(role)
+    if (!role) {
+      throw new NotFoundException(`Role with ID ${roleId} not found`);
+    }
+
+    //user.roleId = role.idAdminModo;
+    return this._repo.save(user);
   }
 }

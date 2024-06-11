@@ -1,7 +1,11 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne} from "typeorm";
 import{Exclude} from "class-transformer";
 import {IsOptional} from "class-validator";
 import {AdminModo} from "../../admin-modo/entities/admin-modo.entity";
+import {ForeignKeyMetadata} from "typeorm/metadata/ForeignKeyMetadata";
+import {Amis} from "../../amis/entities/ami.entity";
+import {PublicationForum} from "../../publication-forums/entities/publication-forum.entity";
+import {CommentairesForum} from "../../commentaires-forum/entities/commentaires-forum.entity";
 
 
 @Entity()
@@ -49,13 +53,23 @@ export class Utilisateurs {
     @IsOptional()
     idAvatar:number;
 
-    @OneToOne(type => AdminModo, adminModo => adminModo.admin, { nullable: true })
-    adminModo: AdminModo;
+    @ManyToOne(()=>AdminModo,(adminModo)=>adminModo.utilistateurs,)
+    @JoinColumn({name:'roleId'})
+    role:AdminModo;
+    @Column({nullable:true})
+    roleId: string;
 
-    @OneToMany(type => AdminModo, adminModo => adminModo.modo, { nullable: true })
-    modos: AdminModo[];
 
-    @OneToMany(type => AdminModo, adminModo => adminModo.warriorOfLight, { nullable: true })
-    warriorsOfLight: AdminModo[];
 
+    @OneToMany(()=>Amis,amis=>amis.utilisateur)
+    amisEnvoyes:Amis[];
+
+    @OneToMany(()=>Amis,amis =>amis.ami)
+    amisRecus:Amis[];
+
+    @OneToMany(() => PublicationForum, publication => publication.utilisateur)
+    publications: PublicationForum[];
+
+    @OneToMany(() => CommentairesForum, commentaire => commentaire.auteur)
+    commentaires: CommentairesForum[];
 }

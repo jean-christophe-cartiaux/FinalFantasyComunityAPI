@@ -1,19 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAdminModoDto } from './dto/create-admin-modo.dto';
 import { UpdateAdminModoDto } from './dto/update-admin-modo.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {AdminModo} from "./entities/admin-modo.entity";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class AdminModoService {
+  constructor (@InjectRepository (AdminModo) private _repo: Repository<AdminModo>){}
   create(createAdminModoDto: CreateAdminModoDto) {
     return 'This action adds a new adminModo';
   }
 
-  findAll() {
-    return `This action returns all adminModo`;
+   find() {
+    return this._repo.find()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} adminModo`;
+
+  }
+  findAdmin() {
+    return
   }
 
   update(id: number, updateAdminModoDto: UpdateAdminModoDto) {

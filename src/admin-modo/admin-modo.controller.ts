@@ -1,9 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { AdminModoService } from './admin-modo.service';
 import { CreateAdminModoDto } from './dto/create-admin-modo.dto';
 import { UpdateAdminModoDto } from './dto/update-admin-modo.dto';
+import {AdminGuard} from "../utilisateurs/guards/admin.guard";
+import {Roles} from "../utilisateurs/decorators/decorator";
 
 @Controller('admin-modo')
+@UseGuards(AdminGuard)
 export class AdminModoController {
   constructor(private readonly adminModoService: AdminModoService) {}
 
@@ -13,8 +16,9 @@ export class AdminModoController {
   }
 
   @Get()
-  findAll() {
-    return this.adminModoService.findAll();
+  @Roles('Admin')
+  find() {
+    return this.adminModoService.find();
   }
 
   @Get(':id')

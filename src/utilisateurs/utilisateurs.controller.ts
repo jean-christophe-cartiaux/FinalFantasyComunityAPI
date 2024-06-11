@@ -21,6 +21,12 @@ import {Utilisateurs} from "./entities/utilisateur.entity";
 import {LoginUtilisateurDto} from "./dto/login-utilisateur.dto";
 import {AuthGuard} from "./guards/auth.guard";
 
+
+export enum Role{
+    Warrio_Of_Light='F9FD7024-715C-407F-8CA6-796B9A5AF8FF',
+    Modo='7C2D0C1D-21A3-4C6F-B61F-6CCEA2EB1D0D',
+    Admin='BF17E836-4B56-4B36-A449-0A68C7CECAFA'
+}
 @Controller('utilisateurs')
 export class UtilisateursController {
   constructor(
@@ -54,6 +60,17 @@ export class UtilisateursController {
 
   }
 
+  @Get('/:id')
+  async getprofil( @Param('id') id: string):Promise <Partial<Utilisateurs>> {
+
+      const utilisateurs = await this._utilisateurService.findOne(id)
+
+
+      return utilisateurs;
+
+  }
+
+
 
 
   @Post('/login')
@@ -66,11 +83,18 @@ export class UtilisateursController {
   }
    @Patch('/:id')
    update(@Param('id') id: string, @Body() body: UpdateUtilisateurDto) {
-    console.log(typeof body.idAvatar)
-     return this._utilisateurService.update(id,body);
+
+     return this._utilisateurService.update(id,body.toEntity());
    }
     @Delete('/:id')
    remove(@Param('id') id: string) {
       return this._utilisateurService.remove(id);
     }
+
+    @Patch('/role/:id')
+    async assignRole(@Param('id') id: string,@Body('roleName') roleName: string  ) {
+
+
+      return await this._utilisateurService.assignRole(id, Role[roleName]);
+  }
 }

@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, OneToMany} from "typeorm";
 import { Exclude } from "class-transformer";
 import { IsOptional } from "class-validator";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
@@ -8,21 +8,14 @@ import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 export class AdminModo {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    idAdminModo: string;
 
-    @Column()
-    idUtilisateur: string;
+
 
     @Column()
     roles: string;
 
+    @OneToMany(()=> Utilisateurs,(utilisateurs)=>utilisateurs.roleId)
+    utilistateurs:Utilisateurs[];
 
-    @ManyToOne(() => Utilisateurs, user => user.adminModo)
-    admin: Utilisateurs;
-
-    @ManyToOne(() => Utilisateurs, user => user.modos)
-    modo: Utilisateurs;
-
-    @ManyToOne(() => Utilisateurs, user => user.warriorsOfLight)
-    warriorOfLight: Utilisateurs;
 }
