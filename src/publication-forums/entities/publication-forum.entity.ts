@@ -1,13 +1,14 @@
-import {Column, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 import {CommentairesForum} from "../../commentaires-forum/entities/commentaires-forum.entity";
 
+@Entity()
 export class PublicationForum {
 
     @PrimaryGeneratedColumn()
     idPubliationForum: number;
 
-    @Column({type:"string"})
+    @Column()
     contenu:string
 
     @Column({type:"timestamp",default:()=> 'CURRENT_TIMESTAMP'})
@@ -16,12 +17,12 @@ export class PublicationForum {
 
     //TODO
     // FK AUTEUR ID
-    @ManyToOne(()=>Utilisateurs)
-    @JoinTable({name:"idUtilisateur"})
+    @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.publicationsForum)
     utilisateur:Utilisateurs;
 
-    @OneToMany(()=>CommentairesForum,commentaire=>commentaire.publication)
+    @OneToMany(() => CommentairesForum,commentaire => commentaire.publication)
     commentaires:CommentairesForum[];
+
 
 
 }

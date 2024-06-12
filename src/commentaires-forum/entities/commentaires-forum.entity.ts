@@ -1,14 +1,16 @@
-import {PrimaryGeneratedColumn} from "typeorm/browser";
-import {Column, JoinColumn, ManyToOne} from "typeorm";
+
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {PublicationForum} from "../../publication-forums/entities/publication-forum.entity";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 
+@Entity()
 export class CommentairesForum {
     @PrimaryGeneratedColumn()
     idCommentaire: number;
 
     @Column()
     contenu:string
+
     @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
     dateCommentaire:Date;
 

@@ -9,7 +9,7 @@ import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 export class Amis {
 
     @PrimaryGeneratedColumn('uuid')
-
+    idRelation:string
 
 
     @Column()

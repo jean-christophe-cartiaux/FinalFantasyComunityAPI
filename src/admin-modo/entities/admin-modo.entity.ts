@@ -7,7 +7,7 @@ import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 @Entity()
 export class AdminModo {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     idAdminModo: string;
 
 

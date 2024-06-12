@@ -1,8 +1,9 @@
-import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 import {PublicationForum} from "../../publication-forums/entities/publication-forum.entity";
 import {Actualites} from "../../actualites/entities/actualite.entity";
 
+@Entity()
 export class Reaction {
 
     @PrimaryGeneratedColumn()

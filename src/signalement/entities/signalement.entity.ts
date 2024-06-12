@@ -1,7 +1,9 @@
-import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 import {PublicationForum} from "../../publication-forums/entities/publication-forum.entity";
 
+
+@Entity()
 export class Signalement {
 
     @PrimaryGeneratedColumn()

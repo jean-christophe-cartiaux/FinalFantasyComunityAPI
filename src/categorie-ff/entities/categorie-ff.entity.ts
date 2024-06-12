@@ -1,7 +1,7 @@
-import {Column, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Actualites} from "../../actualites/entities/actualite.entity";
 
-
+@Entity()
 export class CategorieFf {
 
     @PrimaryGeneratedColumn()

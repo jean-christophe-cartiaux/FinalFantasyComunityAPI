@@ -1,7 +1,9 @@
-import {JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 import {Actualites} from "../../actualites/entities/actualite.entity";
 
+
+@Entity()
 export class LikesActualite {
     @PrimaryGeneratedColumn()
     idLike:number

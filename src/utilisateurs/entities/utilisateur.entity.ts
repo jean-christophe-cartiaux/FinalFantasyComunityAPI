@@ -67,9 +67,12 @@ export class Utilisateurs {
     @OneToMany(()=>Amis,amis =>amis.ami)
     amisRecus:Amis[];
 
-    @OneToMany(() => PublicationForum, publication => publication.utilisateur)
-    publications: PublicationForum[];
+    @OneToMany(() => PublicationForum, publicationForum => publicationForum.utilisateur)
+    publicationsForum: PublicationForum[];
 
     @OneToMany(() => CommentairesForum, commentaire => commentaire.auteur)
     commentaires: CommentairesForum[];
+
+    @ManyToOne(()=> Utilisateurs,utilisateur=>utilisateur.publicationsForum)
+    utilisateur:Utilisateurs;
 }

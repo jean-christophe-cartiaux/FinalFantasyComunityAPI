@@ -1,6 +1,7 @@
-import {Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Utilisateurs} from "../../utilisateurs/entities/utilisateur.entity";
 
+@Entity()
 export class Evenement {
 
     @PrimaryGeneratedColumn()
