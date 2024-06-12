@@ -4,7 +4,7 @@ import {ValidationPipe} from "@nestjs/common";
 const cookieSession=require('cookie-session');
 import* as dotenv from "dotenv";
 import * as process from "node:process";
-import 'reflect-metadata';
+
 
 
 
