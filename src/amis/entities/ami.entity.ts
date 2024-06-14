@@ -23,18 +23,15 @@ export class Amis {
     // ajout  2 FK
     // ID UTILISATEUR LES DEUX !
 
-    @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisEnvoyes)
-    @JoinColumn({name:'utilisateurId'})
-    utilisateur:Utilisateurs;
+    // @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisEnvoyes)
+    // @JoinColumn({name:'utilisateurId'})
+    // utilisateur:Utilisateurs;
+    //
+    // @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisRecus)
+    // @JoinColumn({name:"amiId"})
+    // ami:Utilisateurs;
 
-    @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisRecus)
-    @JoinColumn({name:"amiId"})
-    ami:Utilisateurs;
 
-    @Column()
-    utilisateurId:string;
-    @Column()
-    amiId:string;
 
 
 

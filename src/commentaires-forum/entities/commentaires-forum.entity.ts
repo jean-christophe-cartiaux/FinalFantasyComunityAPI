@@ -24,4 +24,6 @@ export class CommentairesForum {
     @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.commentaires)
     @JoinColumn({name:"idAuteur"})
     auteur:Utilisateurs;
+
+
 }
