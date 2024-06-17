@@ -12,7 +12,7 @@ export class Reaction {
     @Column()
     emoji:string
 
-    @Column({type:"timestamp",default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:"timestamp"})
     dateReaction:Date
 
 

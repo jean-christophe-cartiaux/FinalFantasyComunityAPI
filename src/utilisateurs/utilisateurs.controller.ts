@@ -11,7 +11,9 @@ import {
   UseInterceptors,
   Session,
   UseGuards,
+    Response
 } from '@nestjs/common';
+import { Response as Res } from 'express';
 import { UtilisateursService } from './utilisateurs.service';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
@@ -50,17 +52,17 @@ export class UtilisateursController {
     return utilisateur;
   }
 
+  // @Get('/profil/:id')
+  // async profil(@UtilisateurCourant()body : Utilisateurs, @Param('id') id: string):Promise <Partial<Utilisateurs>> {
+  //   const {pseudo,bio,supportPref,idAvatar}= body;
+  //   const utilisateurs= await this._utilisateurService.profil({pseudo,bio,supportPref,idAvatar},id)
+  //
+  //
+  //   return utilisateurs;
+  //
+  // }
+
   @Get('/profil/:id')
-  async profil(@UtilisateurCourant()body : Utilisateurs, @Param('id') id: string):Promise <Partial<Utilisateurs>> {
-    const {pseudo,bio,supportPref,idAvatar}= body;
-    const utilisateurs= await this._utilisateurService.profil({pseudo,bio,supportPref,idAvatar},id)
-
-
-    return utilisateurs;
-
-  }
-
-  @Get('/:id')
   async getprofil( @Param('id') id: string):Promise <Partial<Utilisateurs>> {
 
       const utilisateurs = await this._utilisateurService.findOne(id)
@@ -74,17 +76,17 @@ export class UtilisateursController {
 
 
   @Post('/login')
-  async login(@Body() body:LoginUtilisateurDto,@Session()session:any) {
+  async login(@Body() body:LoginUtilisateurDto,@Session()session:any, @Response() res: Res) {
     const {email, mdpHash }= body;
     const utilisateur= await this._authService.login({email, mdpHash})
-    session.userId=utilisateur.id;
 
-    return utilisateur;
+    session.userId=utilisateur.id;
+    res.setHeader("Authorization","Bearer " + utilisateur.token).json(utilisateur);
   }
    @Patch('/:id')
    update(@Param('id') id: string, @Body() body: UpdateUtilisateurDto) {
-
-     return this._utilisateurService.update(id,body.toEntity());
+       console.log(body)
+     return this._utilisateurService.update(id,body);
    }
     @Delete('/:id')
    remove(@Param('id') id: string) {

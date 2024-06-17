@@ -15,7 +15,7 @@ export class Amis {
     @Column()
     statut:string
 
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:'timestamp'})
     dateAjout:Date;
 
 
@@ -23,13 +23,13 @@ export class Amis {
     // ajout  2 FK
     // ID UTILISATEUR LES DEUX !
 
-    // @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisEnvoyes)
-    // @JoinColumn({name:'utilisateurId'})
-    // utilisateur:Utilisateurs;
-    //
-    // @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisRecus)
-    // @JoinColumn({name:"amiId"})
-    // ami:Utilisateurs;
+    @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisEnvoyes)
+    @JoinColumn({name:'utilisateurId'})
+    utilisateur:Utilisateurs;
+
+    @ManyToOne(()=>Utilisateurs,utilisateur=>utilisateur.amisRecus)
+    @JoinColumn({name:"amiId"})
+    ami:Utilisateurs;
 
 
 

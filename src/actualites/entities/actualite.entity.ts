@@ -16,7 +16,7 @@ export class Actualites {
     @Column()
     contenu:string
 
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:'timestamp'})
     datePublication:Date;
 
     @ManyToOne(()=>CategorieFf,categorie=>categorie.actualites)

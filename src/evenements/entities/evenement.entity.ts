@@ -13,9 +13,9 @@ export class Evenement {
     @Column()
     descriptionEvent:string
 
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:'datetime'})
     dateDebut:Date
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:'datetime'})
     dateFin:Date
 
     @Column()

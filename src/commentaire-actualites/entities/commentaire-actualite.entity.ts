@@ -12,7 +12,7 @@ export class CommentaireActualite {
     @Column()
     contenu:string
 
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP' })
+    @Column({type:'timestamp' })
     dateCommentaire:Date;
 
     @ManyToOne(()=>Actualites,actualite =>actualite.commentaires)

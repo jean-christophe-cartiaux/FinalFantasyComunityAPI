@@ -9,7 +9,8 @@ import {Repository} from "typeorm";
 export class AdminModoService {
   constructor (@InjectRepository (AdminModo) private _repo: Repository<AdminModo>){}
   create(createAdminModoDto: CreateAdminModoDto) {
-    return 'This action adds a new adminModo';
+  const adminModo=this._repo.create(createAdminModoDto);
+    return this._repo.save(adminModo);
   }
 
    find() {
@@ -19,6 +20,10 @@ export class AdminModoService {
   findOne(id: number) {
 
   }
+  findRoleByName(role: string) {
+  return this._repo.findOne({where:{ roles: role }});
+  }
+
   findAdmin() {
     return
   }

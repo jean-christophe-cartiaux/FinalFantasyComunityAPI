@@ -2,7 +2,9 @@ import { Injectable,BadRequestException,NotFoundException } from '@nestjs/common
 import {UtilisateursService} from "./utilisateurs.service";
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
-
+import * as process from "node:process";
+const jwt = require('jsonwebtoken');
+import{Response} from "express";
 
 const scrypt = promisify(_scrypt);
 
@@ -27,7 +29,7 @@ export class AuthService {
         return utilisateurs
     }
 
-    async login(body){
+    async login(body: any){
         const {email,mdpHash}=body
         const [utilisateurs] = await this._utilisateursService.find(email);
         if(!utilisateurs){
@@ -40,7 +42,28 @@ export class AuthService {
         if(storedHash !== hash.toString('hex')){
             throw new BadRequestException('Mots de passe invalide ಠ_ಠ')
         }
+// creation token
+        const id = utilisateurs.id;
+        const payload={
+            utilisateurId:id,
+            pseudo: utilisateurs.pseudo,
+            roleId: utilisateurs.roleId
+        };
+        const options ={
+            expiresIn: '2d'
+        }
+        const secret = process.env.JWT_SECRET;
+        const token = jwt.sign(payload, secret,options);
+        const utilisateurJwt= ({token,id});
 
-        return utilisateurs;
+        return utilisateurJwt
+        // if (utilisateurJwt){
+        //     res.setHeader('Authorization', `Bearer ${token}`);
+        //     res.status(200).json({token})
+        // }
+        // if(!utilisateurs){
+        //     res.status(404).json({message:`L'utilisateur avec l'émail : ${email}n'existe pas ¯\\_(ツ)_/¯`})
+        // }
+        // return utilisateurJwt;
     }
 }

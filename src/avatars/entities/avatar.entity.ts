@@ -1,6 +1,7 @@
-import {Column, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Injectable} from "@nestjs/common";
 
-
+@Entity()
 export class Avatar {
 
     @PrimaryGeneratedColumn()

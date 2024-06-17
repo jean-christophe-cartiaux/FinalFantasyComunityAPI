@@ -11,7 +11,7 @@ export class CommentairesForum {
     @Column()
     contenu:string
 
-    @Column({type:'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:'timestamp'})
     dateCommentaire:Date;
 
     //TODO

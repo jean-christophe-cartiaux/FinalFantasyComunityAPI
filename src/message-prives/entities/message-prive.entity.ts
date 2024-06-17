@@ -9,7 +9,7 @@ export class MessagePrive {
     @Column({type:"text"})
     contenueMp:string
 
-    @Column({type: 'timestamp',default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type: 'timestamp'})
     datMp:Date;
 
     //TODO

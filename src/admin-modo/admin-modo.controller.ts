@@ -12,6 +12,7 @@ export class AdminModoController {
 
   @Post()
   create(@Body() createAdminModoDto: CreateAdminModoDto) {
+    console.log(createAdminModoDto);
     return this.adminModoService.create(createAdminModoDto);
   }
 

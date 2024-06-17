@@ -47,7 +47,7 @@ import {UtilisateursModule} from "./utilisateurs/utilisateurs.module";
   imports: [
       ConfigModule.forRoot(),
       TypeOrmModule.forRoot({
-          logging:true,
+          //logging:true,
         type:"mssql",
           host: process.env.DB_HOST,
           port: parseInt(process.env.DB_PORT,10) ,
@@ -59,7 +59,7 @@ import {UtilisateursModule} from "./utilisateurs/utilisateurs.module";
           },
         entities:[Actualites,
             AdminModo,
-             //Amis,
+             Amis,
              Avatar,
              CategorieFf,
              CommentaireActualite,
@@ -77,7 +77,7 @@ import {UtilisateursModule} from "./utilisateurs/utilisateurs.module";
              Statistique,
              Utilisateurs
         ],
-        synchronize: true
+        synchronize: false
       }),
       AdminModoModule,
       ActualitesModule,

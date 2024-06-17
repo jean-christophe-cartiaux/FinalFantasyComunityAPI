@@ -7,9 +7,12 @@ import {UtilisateurInterceptor} from "../Interceptors/utilisateur-interceptor";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Utilisateurs} from "./entities/utilisateur.entity";
 import {AdminModo} from "../admin-modo/entities/admin-modo.entity";
+import {AdminModoModule} from "../admin-modo/admin-modo.module";
+import {AdminModoService} from "../admin-modo/admin-modo.service";
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Utilisateurs,AdminModo]),forwardRef(()=>AdminModo)],
+    imports:[TypeOrmModule.forFeature([Utilisateurs,AdminModo]),
+        forwardRef(()=>AdminModoModule)],
   controllers: [UtilisateursController],
   providers: [
       UtilisateursService,

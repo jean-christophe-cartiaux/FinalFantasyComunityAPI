@@ -22,7 +22,7 @@ export class UpdateUtilisateurDto  {
 
     @IsString()
     @IsOptional()
-    mdpHash:string
+    password:string
 
     @IsString()
     @IsOptional()
@@ -40,17 +40,17 @@ export class UpdateUtilisateurDto  {
     @IsOptional()
     roleId:string
 
-    toEntity(): Utilisateurs{
-        const u = new Utilisateurs();
-        u.prenom=this.prenom;
-        u.nom=this.nom;
-        u.pseudo = this.pseudo;
-        u.email=this.email;
-        u.bio = this.bio;
-        u.supportPref=this.supportPref;
-        u.idAvatar=this.idAvatar;
-        u.roleId=this.roleId;
-        u.mdpHash=this.mdpHash;
-        return u;
-    }
+    // toEntity(): Utilisateurs{
+    //     const u = new Utilisateurs();
+    //     u.prenom=this.prenom;
+    //     u.nom=this.nom;
+    //     u.pseudo = this.pseudo;
+    //     u.email=this.email;
+    //     u.bio = this.bio;
+    //     u.supportPref=this.supportPref;
+    //     u.idAvatar=this.idAvatar;
+    //     u.roleId=this.roleId;
+    //     u.mdpHash=this.mdpHash;
+    //     return u;
+    // }
 }

@@ -11,7 +11,7 @@ export class Signalement {
 
     @Column({type:"text"})
     raisonSignalement:string
-    @Column({type:"timestamp",default:()=> 'CURRENT_TIMESTAMP'})
+    @Column({type:"timestamp"})
     dateSignalement:Date;
 
 
